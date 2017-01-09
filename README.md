@@ -1,2 +1,0 @@
-# blog-server
-blog server

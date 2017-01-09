@@ -1,0 +1,8 @@
+{
+	"username": "pro",
+    "password": "080728",
+    "database": "snowblog",
+    "host": "115.29.150.218",
+    "dialect": "mysql",
+    "port":"3306"
+}
