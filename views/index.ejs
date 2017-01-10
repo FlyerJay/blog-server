@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+	<link rel="stylesheet" href="/stylesheets/quill.bubble.css">
+	<link rel="stylesheet" href="/stylesheets/quill.snow.css">
+	<script src="/javascripts/jquery.js"></script>
+	<script src="/javascripts/quill.min.js"></script>
+</head>
+<body>
+	<div id="toolbar">
+		<button class="ql-bold">Bold</button>
+		<button class="ql-italic">Italic</button>
+	</div>
+	<div id="editor">
+		<p>Hello World!</p>
+	</div>
+	<script>
+		window.onload = function(){
+			var editor = new Quill('#editor', {
+			    modules: { toolbar: '#toolbar' },
+			    theme: 'snow'
+			});
+			console.log(editor);
+		}
+	</script>
+</body>
 </html>
