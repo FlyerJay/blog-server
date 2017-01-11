@@ -4,27 +4,17 @@
 	<meta charset="UTF-8">
 	<title><%= title %></title>
 	<link rel="stylesheet" href="/stylesheets/style.css">
-	<link rel="stylesheet" href="/stylesheets/quill.bubble.css">
-	<link rel="stylesheet" href="/stylesheets/quill.snow.css">
+	<link rel="stylesheet" href="/stylesheets/wangEditor.css">
 	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/quill.min.js"></script>
+	<script src="/javascripts/wangEditor.js"></script>
 </head>
 <body>
-	<div id="toolbar">
-		<button class="ql-bold">Bold</button>
-		<button class="ql-italic">Italic</button>
-	</div>
-	<div id="editor">
-		<p>Hello World!</p>
+	<div id="txt">
+		
 	</div>
 	<script>
-		window.onload = function(){
-			var editor = new Quill('#editor', {
-			    modules: { toolbar: '#toolbar' },
-			    theme: 'snow'
-			});
-			console.log(editor);
-		}
+		var editor = new wangEditor("txt");
+		editor.create();
 	</script>
 </body>
 </html>
