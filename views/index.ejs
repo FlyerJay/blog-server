@@ -6,14 +6,15 @@
 	<link rel="stylesheet" href="/stylesheets/style.css">
 	<link rel="stylesheet" href="/stylesheets/wangEditor.css">
 	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/wangEditor.js"></script>
+	<script src="/javascripts/pureEditor.js"></script>
 </head>
 <body>
+	<span>pureEditor</span>
 	<div id="txt">
 		
 	</div>
 	<script>
-		var editor = new wangEditor("txt");
+		var editor = new pureEditor("#txt");
 		editor.create();
 	</script>
 </body>
