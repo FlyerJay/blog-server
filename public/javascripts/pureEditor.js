@@ -238,8 +238,8 @@
 
 	E.fn.initDefaultConfig = function(){
 		var editor = this;
-		editor.config = $.extend({},E.config);
-		editor.UI = $.extend({},E.UI);
+		editor.config = $.extend({},editor.config);
+		editor.UI = $.extend({},editor.UI);
 	}
 
 	E.fn.addEditorContainer = function(){
@@ -477,6 +477,14 @@
 			createMenuFn.call(editor,check);
 		})
 	}
+
+	E.createMenu(function(check){
+		var menuId = 'bold';
+		if(!check(menuId)){
+			return;
+		}
+		var editor = this;
+	})
 
 	window.pureEditor = E;
 }($)
