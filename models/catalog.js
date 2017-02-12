@@ -4,7 +4,7 @@ module.exports = (sequelize,DataTypes)=>{
 		catalogId:{
 			type:DataTypes.INTEGER,
 			primaryKey: true,
-      		autoIncrement: true
+      		autoIncrement: true,
 		},
 		catalogName:{
 			type:DataTypes.STRING(20),

@@ -1,6 +1,6 @@
 "user strict";
 module.exports = (sequelize,DataTypes)=>{
-	const Banner = sequelize.define("Blog",{
+	const Blog = sequelize.define("Blog",{
 		blogId:{
 			type:DataTypes.INTEGER,
 			primaryKey: true,
@@ -53,5 +53,5 @@ module.exports = (sequelize,DataTypes)=>{
 		tableName:"blog",
 		timestamps:true
 	})
-	return Banner;
+	return Blog;
 }
