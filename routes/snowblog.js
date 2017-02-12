@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var models = require("../models");
-//构造返回对象的实体，code默认为200，当有错误时会返回errorinfo，数据中有list时会返回pageinfo
+var $ = require("cheerio");
 
 router.get('/', function(req, res, next) {
   	res.send('can not get detail request!');
 });
 
-models.Blog.belongsTo(models.Catalog,{foreignKey:'catalogId',targetKey:'catalogId'});
+models.Blog.belongsTo(models.Catalog,{foreignKey:'catalogId',targetKey:'catalogId'});//定义Blog和Catalog间的关系
 
 router.get('/blog', function(req, res, next) {
 	models.Blog.findAndCountAll({
@@ -27,9 +27,12 @@ router.get('/blog', function(req, res, next) {
 		}
 		if(datas.rows.length>0){
 			result.code = 200;
+			for(var i = 0;i<datas.rows.length;i++){
+				datas.rows[i].summary = $(datas.rows[i].article).text().substring(0,200);
+			}
 			result.data.list = datas.rows;
 			result.pageinfo = {}
-			result.pageinfo.pageSize = req.query.pageSize;
+			result.pageinfo.pageSize = req.query.pageSize - 0;
 			result.pageinfo.totalCount = datas.count;
 			result.pageinfo.page = req.query.page - 0;
 		}else{
@@ -138,8 +141,8 @@ router.delete('/blog/:id', function(req, res, next) {
 
 router.get('/catalog', function(req, res, next) {
 	models.Catalog.findAndCountAll({
-		limit:req.query.pageSize - 0,
-		offset:(req.query.page - 1) * (req.query.pageSize - 0),
+		limit:req.query.pageSize - 0 || 9999,
+		offset:(req.query.page - 1) * (req.query.pageSize - 0) || 0,
 		order:'createdAt desc'
 	}).then(function(datas){
 		var result = {
