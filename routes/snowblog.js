@@ -66,6 +66,7 @@ router.post('/blog', function(req, res, next) {
 router.get('/blog/:id', function(req, res, next) {
 	var id = req.params.id;
 	models.Blog.findOne({
+		include:[models.Catalog],
 		where:{
 			blogId:{
 				$eq:id,
