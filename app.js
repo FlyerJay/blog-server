@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var manager = require('./routes/manager');
+var blog = require('./routes/blog');
 var snowblog = require('./routes/snowblog');
 
 var app = express();
@@ -22,7 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', manager);//为本地管理系统提供的路由
+app.use('/manager', manager);//为本地管理系统提供的路由
+app.use('/blog', blog);//为本地管理系统提供的路由
 app.use('/snowblog', snowblog);//为vue-store提供rest服务的路由
 
 // catch 404 and forward to error handler
