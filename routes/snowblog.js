@@ -12,8 +12,8 @@ models.Blog.belongsTo(models.Catalog,{foreignKey:'catalogId',targetKey:'catalogI
 router.get('/blog', function(req, res, next) {
 	models.Blog.findAndCountAll({
 		include:[models.Catalog],
-		limit:req.query.pageSize - 0,
-		offset:(req.query.page - 1) * (req.query.pageSize - 0),
+		limit:req.query.pageSize - 0 || 9999,
+		offset:(req.query.page - 1) * (req.query.pageSize - 0) || 0,
 		order:'createdAt desc'
 	}).then(function(datas){
 		var result = {
