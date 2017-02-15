@@ -29,6 +29,7 @@ router.get('/blog', function(req, res, next) {
 			result.code = 200;
 			for(var i = 0;i<datas.rows.length;i++){
 				datas.rows[i].summary = $(datas.rows[i].article).text().substring(0,200);
+				datas.rows[i].article = "";
 			}
 			result.data.list = datas.rows;
 			result.pageinfo = {}
