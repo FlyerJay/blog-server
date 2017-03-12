@@ -9,6 +9,9 @@ router.get('/', function(req, res, next) {
 
 models.Blog.belongsTo(models.Catalog,{foreignKey:'catalogId',targetKey:'catalogId'});//定义Blog和Catalog间的关系
 
+/**
+ * 获取博客列表
+ */
 router.get('/blog', function(req, res, next) {
 	models.Blog.findAndCountAll({
 		include:[models.Catalog],
@@ -46,6 +49,9 @@ router.get('/blog', function(req, res, next) {
 	})
 });
 
+/**
+ * 新增一篇博客
+ */
 router.post('/blog', function(req, res, next) {
 	models.Blog.create(req.body.params).then(function(data){
 		var result = {
@@ -64,6 +70,9 @@ router.post('/blog', function(req, res, next) {
 	})
 });
 
+/**
+ * 查看博客
+ */
 router.get('/blog/:id', function(req, res, next) {
 	var id = req.params.id;
 	models.Blog.findOne({
@@ -97,6 +106,9 @@ router.get('/blog/:id', function(req, res, next) {
 	})
 });
 
+/**
+ * 更新博客
+ */
 router.patch('/blog/:id', function(req, res, next) {
 	models.Blog.update(
 		req.body.params,
@@ -120,6 +132,9 @@ router.patch('/blog/:id', function(req, res, next) {
 	})
 });
 
+/**
+ * 删除博客
+ */
 router.delete('/blog/:id', function(req, res, next) {
 	models.Blog.destroy({
 		'where':{
@@ -141,6 +156,9 @@ router.delete('/blog/:id', function(req, res, next) {
 	})
 });
 
+/**
+ * 获取标签列表
+ */
 router.get('/catalog', function(req, res, next) {
 	models.Catalog.findAndCountAll({
 		limit:req.query.pageSize - 0 || 9999,
@@ -173,6 +191,9 @@ router.get('/catalog', function(req, res, next) {
 	})
 });
 
+/**
+ * 获取某个标签
+ */
 router.get('/catalog/:id', function(req, res, next) {
 	models.Catalog.findOne().then(function(datas){
 		var result = {
@@ -197,6 +218,9 @@ router.get('/catalog/:id', function(req, res, next) {
 	})
 });
 
+/**
+ * 新增一个标签
+ */
 router.post('/catalog', function(req, res, next) {
 	models.Catalog.create(req.body.params).then(function(data){
 		var result = {
@@ -214,6 +238,9 @@ router.post('/catalog', function(req, res, next) {
 	})
 });
 
+/**
+ * 更新标签
+ */
 router.patch('/catalog/:id', function(req, res, next) {
 	models.Catalog.update(
 		{
@@ -239,6 +266,9 @@ router.patch('/catalog/:id', function(req, res, next) {
 	})
 });
 
+/**
+ * 删除一个标签
+ */
 router.delete('/catalog/:id', function(req, res, next) {
 	models.Catalog.destroy({
 		'where':{
@@ -259,5 +289,44 @@ router.delete('/catalog/:id', function(req, res, next) {
 		res.json(result);
 	})
 });
+
+/**
+ * 查看一条博客
+ */
+router.get('/view/:id',function(req,res,next){
+	models.Blog.findOne({
+		'where':{
+			'blogId':[req.params.id]
+		}
+	}).then(function(datas){
+		models.Blog.update({
+			hit:datas.hit+1,
+		},{
+			'where':{
+				'blogId':[req.params.id]
+			}
+		}).then(function(data){
+			console.log(data);
+		})
+	})
+})
+
+router.get('/love/:id',function(req,res,next){
+	models.Blog.findOne({
+		'where':{
+			'blogId':[req.params.id]
+		}
+	}).then(function(datas){
+		models.Blog.update({
+			love:datas.love+1,
+		},{
+			'where':{
+				'blogId':[req.params.id]
+			}
+		}).then(function(data){
+			console.log(data);
+		})
+	})
+})
 
 module.exports = router;
