@@ -306,7 +306,18 @@ router.get('/view/:id',function(req,res,next){
 				'blogId':[req.params.id]
 			}
 		}).then(function(data){
-			console.log(data);
+			var result = {
+				code:200,
+				errorinfo:"",
+				data:{
+					list:[],
+				},
+				pageinfo:"",
+				message:""
+			}
+			result.code = 200;
+			result.message = "阅读已记录";
+			res.json(result);
 		})
 	})
 })
@@ -324,7 +335,18 @@ router.get('/love/:id',function(req,res,next){
 				'blogId':[req.params.id]
 			}
 		}).then(function(data){
-			console.log(data);
+			var result = {
+				code:200,
+				errorinfo:"",
+				data:{
+					list:[],
+				},
+				pageinfo:"",
+				message:""
+			}
+			result.code = 200;
+			result.message = "点赞成功";
+			res.json(result);
 		})
 	})
 })
